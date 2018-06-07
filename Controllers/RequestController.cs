@@ -18,7 +18,7 @@ namespace BunqAggregation.Controllers
     public class RequestController : Controller
     {
         [HttpPost]
-        public void Post()
+        public void Post([FromBody] JObject content)
         {
             JObject config = Settings.LoadConfig();
 
@@ -29,9 +29,9 @@ namespace BunqAggregation.Controllers
             Console.WriteLine(" -- Connected as: " + BunqContext.UserContext.UserPerson.DisplayName + " (" + BunqContext.UserContext.UserId + ")\n");
 
 
-            var amount = Request.Form["amount"].ToString();
-            string recipient = Request.Form["recipient"].ToString();
-            string description = Request.Form["description"].ToString();
+            var amount = content["amount"].ToString();
+            string recipient = content["recipient"].ToString();
+            string description = content["description"].ToString();
 
             Console.WriteLine("Todo:");
             Console.WriteLine("----------------------------------------------------------");
