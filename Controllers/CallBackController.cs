@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -127,9 +128,15 @@ namespace BunqAggregation.Controllers
                                             break;
                                     }
 
+                                    DateTime now = DateTime.Today;
+                                    string month = now.ToString("MMMM", new CultureInfo("nl-NL"));
+                                    string year = now.ToString("yyyy");
+                                    string payment_desc = String.Format(action["payment"]["description"].ToString(), month, year);
+
                                     Console.WriteLine("Todo:");
                                     Console.WriteLine("----------------------------------------------------------");
-                                    Console.WriteLine("Transaction Name:      " + rule["name"].ToString());
+                                    Console.WriteLine("Rule Name:             " + rule["name"].ToString());
+                                    Console.WriteLine("Description:           " + payment_desc);
                                     Console.WriteLine("Origin Account:        " + action["payment"]["origin"]["iban"].ToString() + " (" + MonetaryAccountId.ToString() + ")");
                                     Console.WriteLine("Destination Account:   " + action["payment"]["destination"]["iban"].ToString());
                                     Console.WriteLine("Current Balance:       € " + MonetaryAccountBalance);
@@ -140,7 +147,7 @@ namespace BunqAggregation.Controllers
                                     var Recipient = new Pointer("IBAN", action["payment"]["destination"]["iban"].ToString());
                                     Recipient.Name = action["payment"]["destination"]["name"].ToString();
                                     Console.WriteLine("Executing...");
-                                    //var PaymentID = Payment.Create(new Amount(AmountToTransfer.ToString("0.00"), "EUR"), Recipient, action["payment"]["description"].ToString(), MonetaryAccountId).Value;
+                                    var PaymentID = Payment.Create(new Amount(AmountToTransfer.ToString("0.00"), "EUR"), Recipient, payment_desc, MonetaryAccountId).Value;
                                     Console.WriteLine("Yeah, this one is completed!");
                                     Console.WriteLine("----------------------------------------------------------\n");
                                 }
