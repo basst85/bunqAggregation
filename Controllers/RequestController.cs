@@ -40,9 +40,16 @@ namespace BunqAggregation.Controllers
             Console.WriteLine("Amount:                € " + amount);
             Console.WriteLine("----------------------------------------------------------");
 
-            Console.WriteLine("Executing...");
-            RequestInquiry.Create(new Amount(amount, "EUR"), new Pointer("EMAIL", recipient), description, true);
-            Console.WriteLine("Yeah, this one is completed!");
+            if (Convert.ToDouble(amount) > 0)
+            {
+                Console.WriteLine("Executing...");
+                RequestInquiry.Create(new Amount(amount, "EUR"), new Pointer("EMAIL", recipient), description, true);
+                Console.WriteLine("Yeah, this one is completed!");
+            }
+            else
+            {
+                Console.WriteLine("Bummer, nothing to do!");
+            }
             Console.WriteLine("----------------------------------------------------------\n");
         }
     }

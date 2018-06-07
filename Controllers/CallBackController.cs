@@ -144,12 +144,18 @@ namespace BunqAggregation.Controllers
                                     Console.WriteLine("Suggested Transaction: € " + SuggestedTransaction);
                                     Console.WriteLine("----------------------------------------------------------");
 
-                                    var Recipient = new Pointer("IBAN", action["payment"]["destination"]["iban"].ToString());
-                                    Recipient.Name = action["payment"]["destination"]["name"].ToString();
-                                    Console.WriteLine("Executing...");
-                                    var PaymentID = Payment.Create(new Amount(AmountToTransfer.ToString("0.00"), "EUR"), Recipient, payment_desc, MonetaryAccountId).Value;
-                                    Console.WriteLine("Yeah, this one is completed!");
-                                    Console.WriteLine("----------------------------------------------------------\n");
+                                    if (AmountToTransfer > 0)
+                                    {
+                                        var Recipient = new Pointer("IBAN", action["payment"]["destination"]["iban"].ToString());
+                                        Recipient.Name = action["payment"]["destination"]["name"].ToString();
+                                        Console.WriteLine("Executing...");
+                                        var PaymentID = Payment.Create(new Amount(AmountToTransfer.ToString("0.00"), "EUR"), Recipient, payment_desc, MonetaryAccountId).Value;
+                                        Console.WriteLine("Yeah, this one is completed!");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Bummer, nothing to do!");
+                                    }
                                 }
 
                             }
