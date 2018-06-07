@@ -1,0 +1,97 @@
+﻿{
+  "rules": [
+    {
+      "name": "Condition 1 - Transfer differance on callback.",
+      "if": {
+        "type": "mutation",
+        "origin": {
+          "iban": "NL00BUNQ0000000000"
+        },
+        "destination": {
+          "iban": "NL00BUNQ0000000000"
+        },
+        "description": ".*Salary.*"
+      },
+      "then": [
+        {
+          "payment": {
+            "origin": {
+              "iban": "NL00BUNQ0000000000"
+            },
+            "destination": {
+              "iban": "NL00BUNQ0000000000",
+              "name": "Your BFF name"
+            },
+            "description": "The money I had left before my salary got in!",
+            "amount": {
+              "type": "differance"
+            }
+          }
+        },
+        {
+          "email": {
+            "recipient": "online@duijvelshoff.com"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Condition 2 - Based on trigger, with 90% of the saldo on the account (also for CallBack)!",
+      "if": {
+        "type": "trigger"
+      },
+      "then": [
+        {
+          "payment": {
+            "origin": {
+              "iban": "NL00BUNQ0000000000"
+            },
+            "destination": {
+              "iban": "NL00BUNQ0000000000",
+              "name": "Your BFF name"
+            },
+            "description": "Because I love you!",
+            "amount": {
+              "type": "percent",
+              "value": "90"
+            }
+          }
+        },
+        {
+          "email": {
+            "recipient": "online@duijvelshoff.com"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Condition 3 - Based on trigger, with 10 euro of the remaining saldo on the account (also for CallBack)! ",
+      "if": {
+        "type": "trigger"
+      },
+      "then": [
+        {
+          "payment": {
+            "origin": {
+              "iban": "NL00BUNQ0000000000"
+            },
+            "destination": {
+              "iban": "NL00BUNQ0000000000",
+              "name": "Your BFF name"
+            },
+            "description": "Because I love you, I give you 10 euro of at least what I have left!",
+            "amount": {
+              "type": "exact",
+              "value": "10"
+            }
+          }
+        },
+        {
+          "email": {
+            "recipient": "online@duijvelshoff.com"
+          }
+        }
+      ]
+    }
+  ]
+}
