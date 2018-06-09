@@ -33,11 +33,18 @@ namespace BunqAggregation.IFTTT
                                                     {"amount", "0.01"},
                                                     {"email", "online@duijvelshoff.com"}
                                                 }},
-                                            {"payment", new JObject{
+                                            {"transfer_defined_amount", new JObject{
                                                     {"recipient", "Your BFF"},
-                                                    {"description", "You owe me money!"},
+                                                    {"description", "Here is some of my money!"},
                                                     {"amount", "0.01"},
-                                                    {"iban", "NL00BUNQ0000000000"}
+                                                    {"from_iban", "NL00BUNQ0000000000"},
+                                                    {"to_iban", "NL00BUNQ0000000000"}
+                                                }},
+                                            {"transfer_full_saldo", new JObject{
+                                                    {"recipient", "Your wifes name"},
+                                                    {"description", "Here is all of my money!"},
+                                                    {"from_iban", "NL00BUNQ0000000000"},
+                                                    {"to_iban", "NL00BUNQ0000000000"}
                                                 }}
                                         }}
                                 }}

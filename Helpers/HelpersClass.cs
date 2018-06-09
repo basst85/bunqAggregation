@@ -20,4 +20,15 @@ namespace BunqAggregation.Helpers
             http.PostAsync("https://bunq-dev.tada.red/api/request/" ,body);
         }
     }
+
+    public class Payment
+    {
+
+        public static void Execute(JObject content)
+        {
+            var http = new HttpClient();
+            var body = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
+            http.PostAsync("https://bunq-dev.tada.red/api/transfer/", body);
+        }
+    }
 }

@@ -13,6 +13,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="IFTTT\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,5 +31,6 @@
 
   <ItemGroup>
     <Compile Remove="Objects.cs" />
+    <Compile Remove="Helpers\EmptyClass.cs" />
   </ItemGroup>
 </Project>
