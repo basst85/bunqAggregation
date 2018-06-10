@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using BunqAggregation.Helpers;
+using bunqAggregation.Helpers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace BunqAggregation.IFTTT
+namespace bunqAggregation.IFTTT
 {
     [Route("ifttt/v1/[controller]")]
     public class ActionsController : Controller
@@ -156,18 +156,20 @@ namespace BunqAggregation.IFTTT
                 string identifier = Guid.NewGuid().ToString();
 
                 JObject details = new JObject {
-                    {"origin", new JObject {
+                    {"payment", new JObject {
+                        {"origin", new JObject {
                             {"iban", from_iban.ToString()}
                         }},
-                    {"destination", new JObject {
+                        {"destination", new JObject {
                             {"iban", to_iban.ToString()},
                             {"name", recipient.ToString()}
                         }},
-                    {"description", description.ToString()},
-                    {"amount", new JObject {
+                        {"description", description.ToString()},
+                        {"amount", new JObject {
                             {"type", "exact"},
                             {"value", amount.ToString()}
                         }}
+                    }}
                 };
 
                 response = new JObject {
@@ -181,6 +183,7 @@ namespace BunqAggregation.IFTTT
 
                 if (Request.Headers["IFTTT-Test-Mode"].Equals("1"))
                 {
+                    Payment.Execute(details);
                     return StatusCode(200, response);
                 }
                 else
@@ -253,18 +256,20 @@ namespace BunqAggregation.IFTTT
                 string identifier = Guid.NewGuid().ToString();
 
                 JObject details = new JObject {
-                    {"origin", new JObject {
+                    {"payment", new JObject {
+                        {"origin", new JObject {
                             {"iban", from_iban.ToString()}
                         }},
-                    {"destination", new JObject {
+                        {"destination", new JObject {
                             {"iban", to_iban.ToString()},
                             {"name", recipient.ToString()}
                         }},
-                    {"description", description.ToString()},
-                    {"amount", new JObject {
+                        {"description", description.ToString()},
+                        {"amount", new JObject {
                             {"type", "precent"},
                             {"value", "100"}
                         }}
+                    }}
                 };
 
                 response = new JObject {
@@ -278,6 +283,7 @@ namespace BunqAggregation.IFTTT
 
                 if (Request.Headers["IFTTT-Test-Mode"].Equals("1"))
                 {
+                    Payment.Execute(details);
                     return StatusCode(200, response);
                 }
                 else

@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BunqAggregation
+namespace bunqAggregation
 {
     public class Settings {
         public static JObject LoadConfig()

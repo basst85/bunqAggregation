@@ -11,7 +11,7 @@ using Bunq.Sdk.Context;
 using Bunq.Sdk.Model.Generated.Endpoint;
 using Bunq.Sdk.Model.Generated.Object;
 
-namespace BunqAggregation
+namespace bunqAggregation
 {
     public class Program
     {

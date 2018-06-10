@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using BunqAggregation;
+using bunqAggregation;
 using Bunq.Sdk.Context;
 using Bunq.Sdk.Model.Generated.Endpoint;
 using Bunq.Sdk.Model.Generated.Object;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace BunqAggregation.Controllers
+namespace bunqAggregation.Controllers
 {
     [Route("api/[controller]")]
     public class RequestController : Controller

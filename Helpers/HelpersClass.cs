@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BunqAggregation.Helpers
+namespace bunqAggregation.Helpers
 {
 
     public class PaymentRequest
@@ -17,7 +17,7 @@ namespace BunqAggregation.Helpers
         {
             var http = new HttpClient();
             var body = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-            http.PostAsync("https://bunq-dev.tada.red/api/request/" ,body);
+            http.PostAsync(Environment.GetEnvironmentVariable("BUNQAGGREGATION_BASEURL").ToString() + "api/request/" ,body);
         }
     }
 
@@ -28,7 +28,8 @@ namespace BunqAggregation.Helpers
         {
             var http = new HttpClient();
             var body = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-            http.PostAsync("https://bunq-dev.tada.red/api/transfer/", body);
+            http.PostAsync(Environment.GetEnvironmentVariable("BUNQAGGREGATION_BASEURL").ToString() + "api/payment/", body);
         }
     }
+
 }
