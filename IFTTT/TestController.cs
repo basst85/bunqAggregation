@@ -25,30 +25,37 @@ namespace bunqAggregation.IFTTT
                 JObject response = new JObject
                 {
                     {"data", new JObject{
-                            {"samples", new JObject{
-                                    {"actions",new JObject{
-                                            {"request", new JObject{
-                                                    {"recipient", "Your BFF"},
-                                                    {"description", "You owe me money!"},
-                                                    {"amount", "0.01"},
-                                                    {"email", "online@duijvelshoff.com"}
-                                                }},
-                                            {"transfer_defined_amount", new JObject{
-                                                    {"recipient", "Your BFF"},
-                                                    {"description", "Here is some of my money!"},
-                                                    {"amount", "0.01"},
-                                                    {"from_iban", "NL00BUNQ0000000000"},
-                                                    {"to_iban", "NL00BUNQ0000000000"}
-                                                }},
-                                            {"transfer_full_saldo", new JObject{
-                                                    {"recipient", "Your wifes name"},
-                                                    {"description", "Here is all of my money!"},
-                                                    {"from_iban", "NL00BUNQ0000000000"},
-                                                    {"to_iban", "NL00BUNQ0000000000"}
-                                                }}
-                                        }}
+                        {"samples", new JObject{
+                            {"actions",new JObject{
+                                {"request", new JObject{
+                                    {"recipient", "Your BFF"},
+                                    {"description", "You owe me money!"},
+                                    {"amount", "0.01"},
+                                    {"email", "online@duijvelshoff.com"}
+                                }},
+                                {"transfer_defined_amount", new JObject{
+                                    {"recipient", "Your BFF"},
+                                    {"description", "Here is some of my money!"},
+                                    {"amount", "0.01"},
+                                    {"from_iban", "NL00BUNQ0000000000"},
+                                    {"to_iban", "NL00BUNQ0000000000"}
+                                }},
+                                {"transfer_defined_percentage", new JObject{
+                                    {"recipient", "Your BFF"},
+                                    {"description", "Here is half of my money!"},
+                                    {"percentage", "50"},
+                                    {"from_iban", "NL00BUNQ0000000000"},
+                                    {"to_iban", "NL00BUNQ0000000000"}
+                                }},
+                                {"transfer_full_saldo", new JObject{
+                                    {"recipient", "Your wifes name"},
+                                    {"description", "Here is all of my money!"},
+                                    {"from_iban", "NL00BUNQ0000000000"},
+                                    {"to_iban", "NL00BUNQ0000000000"}
                                 }}
+                            }}
                         }}
+                    }}
                 };
                 return StatusCode(200, response);
             }
