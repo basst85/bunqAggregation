@@ -1,0 +1,9 @@
+runtime: aspnetcore
+env: flex
+service: default
+env_variables:
+  SERVICE_URL: "https://bunqaggregation.appspot.com/"
+  BUNQ_API_KEY: ""
+  IFTTT_CHANNEL_KEY: ""
+  IFTTT_SERVICE_KEY: ""
+  GOOGLE_APPLICATION_CREDENTIALS: "google.conf"

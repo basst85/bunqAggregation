@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using bunqAggregation.Common;
 
 namespace bunqAggregation
 {
@@ -14,6 +16,10 @@ namespace bunqAggregation
     {
         public Startup(IHostingEnvironment env)
         {
+            if (!(File.Exists(@"bunq.conf")))
+            {
+                Registraion.Initialize(env);
+            }
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -36,7 +42,8 @@ namespace bunqAggregation
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

@@ -10,12 +10,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using bunqAggregation;
-using bunqAggregation.Helpers;
+using bunqAggregation.Common;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace bunqAggregation.Controllers
+namespace bunqAggregation.Services
 {
     [Route("api/[controller]")]
     public class CallBackController : Controller
@@ -24,24 +21,7 @@ namespace bunqAggregation.Controllers
         public void Post([FromBody] JObject content)
         {
             JObject config = Settings.LoadConfig();
-            Console.WriteLine("Callback is starting:");
-            Console.WriteLine("----------------------------------------------------------");
 
-            // Log all notifications to ElasticSearch
-            string identifier = Guid.NewGuid().ToString();
-            var http = new HttpClient();
-            var body = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-            string url = Environment.GetEnvironmentVariable("ELASTIC_BASEURL").ToString();
-            string username = Environment.GetEnvironmentVariable("ELASTIC_USERNAME").ToString();
-            string password = Environment.GetEnvironmentVariable("ELASTIC_PASSWORD").ToString();
-            string credentials = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-            http.DefaultRequestHeaders.Add("Authorization", "Basic " + credentials);
-
-            http.PutAsync(url + "aggregation/transactions/" + identifier, body);
-
-            Console.WriteLine(content.ToString());
-
-            string category = content["NotificationUrl"]["category"].ToString();
             string amount = content["NotificationUrl"]["object"]["Payment"]["amount"]["value"].ToString();
             string description = content["NotificationUrl"]["object"]["Payment"]["description"].ToString();
             string to_iban = content["NotificationUrl"]["object"]["Payment"]["alias"]["iban"].ToString();
@@ -89,12 +69,7 @@ namespace bunqAggregation.Controllers
                         }
                     }
                 }
-            }
-            if (!match)
-            {
-                Console.WriteLine("None of the conditions match!");
-                Console.WriteLine("----------------------------------------------------------");
-            }           
+            }         
         }
     }
 }

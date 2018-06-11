@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using bunqAggregation.Helpers;
+using bunqAggregation.Common;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace bunqAggregation.IFTTT
+namespace bunqAggregation.Intergration.IFTTT
 {
     [Route("ifttt/v1/[controller]")]
     public class ActionsController : Controller
